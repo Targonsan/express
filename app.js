@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');// loger z biblioteki morgan słuzy do zrzucnaia logów w trybie developerskim
 
 var indexRouter = require('./routes/index');// ta sa imorty podstawowoch storn głownej i uzytkownika
-var usersRouter = require('./routes/users');
+var newsRouter = require('./routes/news');
+var quizRouter = require('./routes/quiz');
+var adminRouter = require('./routes/admin');
 
 var app = express();// uruchamia nasz server
 
@@ -19,9 +21,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(function(req,res,next)
+{
+  // trzbe asie posłużyc globalnymi zmiennymi
+  // na ta chile jest w naszej zmiennej globalnej locals
+  res.locals.path=req.path // mozmy to wysiweltic w layout.pug
+  console.log(req.path);
+  // nie wiem jeszcze dokąłdniej ale next() służy do teog zeby sie nam nei zawiesił server !!
+  next();
+})
 // tutaj jest wywoaływane to co wczensiej zaimportowalem
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/news', newsRouter);
+app.use('/quiz', quizRouter);
+app.use('/admin', adminRouter);
+
 // kiedy ktos bedzie chiał wejsc na jakas stornie niezadeklarowana!!
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

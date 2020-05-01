@@ -1,7 +1,37 @@
 doctype html
+//- a(href=url)=title
+    //- to sprawdza gie w dnaym momencie jestesmy ! tne link ma klase active nie wime po co to jest ale peniw sie przyda abysmy wiedizlei gdzie  jestesmy czyli nadajamy active klasse tej sciezce na której obcenie jestesmy
+mixin item(title,url) 
+  li(class ='list-item')
+   a(href=url class=path== url ? 'active' : '')=title
+    
+
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    //- coz zeby nie pwoeilac naszego menu
   body
+    span= path 
+    //-  sprawdzaie czy nas zatrybut loklany działa poprawnie
+    //- ul
+    //-   li
+    //-     a(href="/") Strona główna
+      
+    //-   li
+    //-     a(href="/news") Aktualnosci
+      
+    //-   li
+    //-     a(href="/quiz") Quiz
+      
+    //-   li
+    //-     a(href="/admin") Adimin 
+    //- bedziemy uzywac jednka mixina 1!!
+    ul
+      +item('Storna głowna','./')
+      +item('Aktualnosci','/news')
+      +item('Quiz','/quiz')
+      +item('Admin','/admin')
+
     block content
+//- layou słuzy do teog aby zdefiniowac stały element strony
