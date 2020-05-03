@@ -1,6 +1,26 @@
 extends layout
-//- jakby tu usunał extends oraz block i pozbył sie spacji jak w sass w h1 i p to by dzialalo i nie trzba byłoby podpinac pod to layoutu w sensie by nie było go a tam sa pzecież ansze styleshhet 
-//- iemusi byc block content to ejst zwykął nazwa ale musi sie okrywac potem 
+
+//- nie wie dlaczego jest each uzyte tutaj 
+//- prawdopodobnie to each jest po to aby wyswietlac w foemir listy ul kolejne li !!
+//-  jajk zabezpieczyn inaczje niz sessiom np ip uzytkowania do abzy pobierał !! nie sma adres ip identyfikuje najlepsizj poaczyc kila zabrezpieczen
 block content
   h1= title
-  p Welcome to #{title}
+  if show
+    form(method='post')
+      p Jaka jets towja ulubiona pora roku
+      ul
+        each item in data
+          li
+            label= item.title
+            input(type="radio" name='quiz' value=item._id)
+      input(type="submit" value ='Zagłosuj')
+      p aby zobaczyc wyniki oddaj głos
+  else
+      h1 Juz wykonałes glos  w ankiecie
+      p wyniki
+      ul
+      each item in data
+        li #{item.title}  głosów: #{item.vote} (#{Math.round(item.vote/sum*100)}%)
+      p Głosów oddano: #{sum}
+
+        
