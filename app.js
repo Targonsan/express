@@ -17,7 +17,7 @@ db.once('open', function() {
   // co znacyz db.once()?
 });
 
-var indexRouter = require('./routes/index');// ta sa imorty podstawowoch storn głownej i uzytkownika
+var indexRouter = require('./routes/index');// ta sa importy podstawowoch storn głownej i uzytkownika
 var newsRouter = require('./routes/news');
 var quizRouter = require('./routes/quiz');
 var adminRouter = require('./routes/admin');

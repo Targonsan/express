@@ -1,6 +1,19 @@
 extends layout
 //- jakby tu usunał extends oraz block i pozbył sie spacji jak w sass w h1 i p to by dzialalo i nie trzba byłoby podpinac pod to layoutu w sensie by nie było go a tam sa pzecież ansze styleshhet 
 //- iemusi byc block content to ejst zwykął nazwa ale musi sie okrywac potem 
+  p Welcome to #{title}
+  //- tworze formularz gdzie bede fltorwa i ebdzie diząłac na querystringu i bedzie typem get !
+  po wyknonaiu teog pojawia nam sie parametr w wyszukiwaerce
+  //-  dzieki value=search zostaje nam to co wyszukiwalimsy 'na stale'
 block content
   h1= title
-  p Welcome to #{title}
+  form(method='get')
+    input(type="text" value=search name='search')
+    input(type="submit" value='szukaj')
+
+
+  each item in data
+    article
+      h1(class='title')=item.title
+      p(class='date')=item.created
+      p=item.description
