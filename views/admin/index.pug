@@ -1,0 +1,26 @@
+extends ../layout
+//- jakby tu usunał extends oraz block i pozbył sie spacji jak w sass w h1 i p to by dzialalo i nie trzba byłoby podpinac pod to layoutu w sensie by nie było go a tam sa pzecież ansze styleshhet 
+//- iemusi byc block content to ejst zwykął nazwa ale musi sie okrywac potem 
+block content
+  h1= title
+  nav
+    ul
+      li
+        a(href='/admin/news/add') Dodaj nowy rekord!
+  table
+    tr
+      th id
+      th tytuł
+      th data Dodania 
+      th akcja
+    each item, index in data
+      tr
+        td=index
+        td=item.title
+        td=item.created
+        td
+          a(href=`/admin/news/delete/${item._id}`) Usuń
+          //- petla each przyjmuje 2 paraemtry
+          //- niesamowicie działa to usuwanie z admin.js wystarczyło przeslać 
+          //- router.get('/news/delete/:id',(req,res)=>{
+          //- News.findByIdAndDelete(req.params.id,(err)=>{ 

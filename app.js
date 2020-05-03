@@ -1,8 +1,21 @@
 var createError = require('http-errors');
+var cookieSession = require('cookie-session')
 var express = require('express');
 var path = require('path');// doponierania sciezek a w tym przyapdku do poprania puvblic assety?
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');// loger z biblioteki morgan słuzy do zrzucnaia logów w trybie developerskim
+var config=require('./config')
+var mongoose = require('mongoose');
+// baza danych !!
+mongoose.connect(config.db, {useNewUrlParser: true});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('polaczylismy sie');
+  // on tutaj usunał informacje o poprawnym połączniu
+  // co znacyz db.once()?
+});
 
 var indexRouter = require('./routes/index');// ta sa imorty podstawowoch storn głownej i uzytkownika
 var newsRouter = require('./routes/news');
@@ -20,6 +33,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// tutaj chce aby te opcje były ladowane z poziomu pliku konfiguracyjnego
+app.use(cookieSession({
+  name: 'session',
+  keys: config.keySession, // klucz ktory bedzie podpisyawał sesje
+  maxAge: config.maxAgeSession// maksymalny cza przechowywania ciasatka
+}))
 
 
 app.use(function(req,res,next)
@@ -55,3 +74,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+// co to jest cluster?
+//haslo  ZtkTSR6XMV5Q1cjP
+//mongodb+srv://admin:ZtkTSR6XMV5Q1cjP@cluster0-ofbud.mongodb.net/test?retryWrites=true&w=majority
