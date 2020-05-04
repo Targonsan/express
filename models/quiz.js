@@ -7,3 +7,4 @@ var quizSchema = new Schema({
 });
 
 module.exports=mongoose.model('Quiz', quizSchema)
+// teraz na koniec utowrzymy endpoint dla api czyli cała przestzrea pi a beda one do ponbeirania filtronwiani i wyswietlania danego artykułu

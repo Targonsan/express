@@ -21,6 +21,7 @@ var indexRouter = require('./routes/index');// ta sa importy podstawowoch storn 
 var newsRouter = require('./routes/news');
 var quizRouter = require('./routes/quiz');
 var adminRouter = require('./routes/admin');
+var apiRouter = require('./routes/api');// ostani krok to dodaje
 
 var app = express();// uruchamia nasz server
 
@@ -55,6 +56,7 @@ app.use('/', indexRouter);
 app.use('/news', newsRouter);
 app.use('/quiz', quizRouter);
 app.use('/admin', adminRouter);
+app.use('/api', apiRouter);
 
 // kiedy ktos bedzie chiał wejsc na jakas stornie niezadeklarowana!!
 // catch 404 and forward to error handler
